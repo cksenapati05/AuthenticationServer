@@ -30,19 +30,14 @@ namespace AuthenticationServer.Controllers
                 throw new UnauthorizedAccessException();
         }
 
-        [HttpGet]
-        public string GetIssuerName()
-        {
-            return "cksenapati";
-        }
-
         private string GenerateJwtToken()
         {
             var algorithm = SecurityAlgorithms.HmacSha256;
 
             var claimsCollection = new List<Claim> {
                 new Claim("Name", "Chandan"),
-                new Claim("id", "1001")
+                new Claim("id", "1001"),
+                new Claim(ClaimTypes.Role, "Admin")
             };
 
             var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("ThisIsMySecurityKeyThatisOf256bits"));
